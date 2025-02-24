@@ -1,0 +1,115 @@
+#include <iostream>
+#include <vector>
+#include <string>
+
+using namespace std;
+
+struct Product {
+    string name;
+    double price;
+};
+
+class magazin {
+private:
+    vector<Product> products;
+    vector<Product> cart;
+    double balance = 59999;
+
+public:
+    void a(string name, double price) {
+        products.push_back({name, price});
+        
+    }
+    
+    void b() {
+        cout <<endl<<"Mavjud maxsulotlar: " << endl;
+        for (int i = 0; i < products.size(); i++) {
+            cout << i + 1 << ". " << products[i].name << " - $" << products[i].price << endl;
+        }
+    }
+    
+    void c(int index) {
+        if (index >= 1 && index <= products.size()) {
+            cart.push_back(products[index - 1]);
+            cout << products[index - 1].name << " savatchaga qo'shildi" << endl;
+        } else {
+            cout << "Nomalum maxsulot ######&^%&*&^&" << endl;
+        }
+    }
+    
+    void d() {
+        cout<<endl<< "Savatchangiz:" << endl;
+        double sum = 0;
+        for (const auto& pro : cart) {
+            cout << "- " << pro.name << " - $" << pro.price << endl;
+            sum += pro.price;
+            balance -= pro.price;
+        }
+        cout << "Total: $" << sum << endl;
+    }
+    
+    void e() {
+        if (cart.empty()) {
+            cout << "Savatchangiz bo'sh | empty" << endl;
+        } else {
+            d();
+            cout << "Successful! Keb turing ^_^" << endl;
+            cout << "Your Balanse: -------------------> $"<<balance<<endl;
+        }
+    }
+};
+
+int main() {
+    magazin store;
+    store.a("Laptop", 799.99);
+    store.a("Smartphone", 499.99);
+    store.a("Headphones", 99.99);
+    store.a("Mouse", 25.99);
+    store.a("Keyboard", 49.99);
+    store.a("Monitor", 199.99);
+    store.a("USB Flash Drive", 15.49);
+    store.a("External Hard Drive", 89.99);
+    store.a("Gaming Chair", 159.99);
+    store.a("Smart Watch", 129.99);
+    store.a("Wireless Speaker", 79.99);
+    store.a("Tablet", 299.99);
+    store.a("Webcam", 45.99);
+    
+    int tanlov;
+    do {
+        cout<<endl<<"1. Maxsulotlar jadvali: "<<endl;
+        cout<<"2. Savatga tiqish: "<<endl;
+        cout<<"3. Savatni ko'rish: "<<endl;
+        cout<<"4. Sotib olish: "<<endl;
+        cout<<"5. Chiqish: "<<endl;
+        
+        cout<<"Tanlash: ";
+        
+        cin >> tanlov;
+        
+        switch (tanlov) {
+            case 1:
+                store.b();
+                break;
+            case 2:
+                int i;
+                cout << "Maxsulot raqami: ";
+                cin >> i;
+                store.c(i);
+                break;
+            case 3:
+                store.d();
+                break;
+            case 4:
+                store.e();
+                break;
+            case 5:
+                cout << "Good bye! G" << endl;
+                break;
+            default:
+                cout << "Xato %_!" << endl;
+        }
+    } while (tanlov != 5);
+    
+    return 0;
+}
