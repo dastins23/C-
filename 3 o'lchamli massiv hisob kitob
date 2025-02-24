@@ -1,0 +1,84 @@
+#include<iostream>
+#include<algorithm>
+using namespace std;
+
+bool tubson( int n){
+    if (n<2) return false;
+    for(int i = 2; i*i <= n; i++){
+        if (n % i == 0 ){
+            return false;
+        }
+    }
+    return true;
+}
+
+int main(){
+    int sum = 0, avr;
+    int num[3][2][2]{
+        {
+            { 24, 17 },
+            { 48, 73 }
+        },
+        {
+            { 16, 365 },
+            { 45, 125 }
+        },
+        {
+            { 98, 85 },
+            { 59, 4000 }
+        }
+    };
+    int low = num[0][0][0];
+    int max, min;
+    int toq, juft, tub;
+    int legth = sizeof(num) / sizeof(num[0][0][0]);
+    int list[legth], a = 0;
+    
+    for(int i = 0; i < 3; i++){
+        for(int j = 0; j < 2; j++){
+            for(int k = 0; k < 2; k++){
+                // o'sish va kamayish tartinida saralash -->
+                list[a++] = num[i][j][k];
+                
+                // max va min topish -->
+                if(low < num[i][j][k]){
+                    max = num[i][j][k];
+                }
+                if(low > num[i][j][k]){
+                    min = num[i][j][k];
+                }
+                // toq va juftni topish -->
+                if(num[i][j][k] % 2 ==0){
+                    cout<<"Juft sonlar: " << num[i][j][k]<<endl;
+                }
+                else{
+                    cout<<"Toq sonlar: " << num[i][j][k]<<endl;
+                }
+                // yig'indini topish -->
+                sum += num[i][j][k];
+                // Tub sonlarni topish -->
+                if(tubson(num[i][j][k])){
+                    cout<<"Tub sonlar: " << num[i][j][k] << endl;
+                }
+                
+            }
+        }
+    }
+    
+    sort(list, list + legth);
+    cout <<endl<< "O'sish tartibida saralangan massiv: "<<endl;
+    for (int i = 0; i < legth; i++)
+        cout << list[i] << " ";
+        
+    reverse(list, list + legth);
+    cout << endl << endl << "Kamayish tartibida saralangan massiv: "<<endl;
+    for (int i = 0; i < legth; i++)
+        cout << list[i] << " ";
+    
+    avr = sum / legth;
+    cout<<endl<<endl<<"Yig'indi: " << sum << endl;
+    cout<<"O'rta qiymat: " << avr << endl;
+    cout<<"Max: " << max << endl;
+    cout<<"Min: " << min << endl;
+    return 0;
+}
