@@ -1,0 +1,152 @@
+#include <iostream>
+using namespace std;
+
+bool identifikatsiya(int age, int password, string name, string id, string card){
+    if(name == "Asilbek" && age == 20 && id == "AA78629231" && card == "9860420024228600" && password == 2244){
+        return true;
+    }
+    else if(name == "Jon" && age == 38 && id == "AB64728112" && card == "8600687342688264" && password == 2244) {
+        return true;
+    }
+    else if(name =="Capitan"&&age == 72 && id == "AA28243264" && card == "4200568374826822" && password == 7722) {
+        return true;
+    } 
+    else {
+        return false;
+    }
+}
+
+bool pul_yech(int summa, int balance){
+    if(summa>balance){
+        return false;
+    }
+    return true;
+}
+
+int main() {
+    int age, password;
+    string name, id, card;
+    int balance = 50000000;
+    int n;
+    cout<<"Assalomu alaykum. Bank xizmatlaridan foidalanish uchun 1 ni bosing: ";
+    cin>>n;
+    if(n == 1){
+        int i;
+        cout<<"Identifikatsiyadan o'tish uchun 1 ni bosing chiqish uchun 0 ni bosing: ";
+        cin>> i;
+        if(i == 1){
+            cout<<"Ismingizni kiriting: ";
+            cin>>name;
+            cout<<"Yoshingizni kiriting: ";
+            cin>>age;
+            cout<<"Passport seriya raqamini kiriting: ";
+            cin>>id;
+            cout<<"Karta raqamingizni kiriting: ";
+            cin>>card;
+            cout<<"Karta parolini kiriting: ";
+            cin>>password;
+            if(identifikatsiya(age, password, name, id, card)){
+                int i;
+                cout<<"Welcome "<<name<<endl;
+                cout<<"Asosiy Menyu ni ko'rish uchun 1 ni bosing: ";
+                cin>>i;
+                if(i == 1){
+                    int xizmatlar;
+                    cout<<"1-Kartadan pul yeshish: "<<endl;
+                    cout<<"2-Kartaga pul kiritish: "<<endl;
+                    cout<<"3-Karta parolini o'zgartirish: "<<endl;
+                    cout<<"4-Karta Balansini ko'rish: "<<endl<<endl;
+                    cin>>xizmatlar;
+                    if(xizmatlar == 1){
+                        int pul;
+                        cout<<"Qancha pul yechmoqchi ekanligingizni kiriting: "<<endl;
+                        cout<<"50.000 so'm pul yechish --> 1"<<endl;
+                        cout<<"100.000 so'm pul yechish --> 2"<<endl;
+                        cout<<"500.000 so'm pul yechish --> 3"<<endl;
+                        cout<<"1.000.000 so'm pul yechish --> 4"<<endl;
+                        cout<<"2.000.000 so'm pul yechish --> 5"<<endl;
+                        cout<<"5.000.000 so'm pul yechish --> 6"<<endl;
+                        cout<<"Boshqa --> 7"<<endl;
+                        cin>>pul;
+                        int summa;
+                        if(pul == 1){
+                            summa = 50000;
+                        }
+                        else if(pul == 2){
+                            summa = 100000;
+                        }
+                        else if(pul == 3){
+                            summa = 500000;
+                        }
+                        else if(pul == 4){
+                            summa = 1000000;
+                        }
+                        else if(pul == 5){
+                            summa = 2000000;
+                        }
+                        else if(pul == 6){
+                            summa = 5000000;
+                        }
+                        else if(pul == 7){
+                            cout<<"Maxsus summani kiriting: ";
+                            cin>> summa; 
+                        }
+                        else{
+                            cout<<"Noto'g'ri summa kiritildi!";
+                        }
+                        
+                        if(pul_yech(summa, balance)){
+                            int foiz = summa/100;
+                            balance -= summa;
+                            balance -= foiz;
+                            cout<<"Pul muvaffaqiyatli yechildi! "<<endl;
+                            cout<<"Xizmat haqqi 1% = "<<foiz<<" so'm"<<endl;
+
+                            cout<<"Balance: "<<balance<<" so'm ^_* ";
+                        }
+                        else{
+                            cout<<"Mablag' yetarli emas ?!";
+                        }
+                    }
+                    else if(xizmatlar == 2){
+                        cout<<"Necha pul kiritmoqchisiz?"<<endl;
+                        int pul_kiritish;
+                        cin>>pul_kiritish;
+                        balance += pul_kiritish;
+                    }
+                    else if(xizmatlar == 3){
+                        int eski_parol, yangi_parol;
+                        cout<<"Eski parolni kiriting: ";
+                        cin>>eski_parol;
+                        if(eski_parol == password){
+                            cout<<"Yangi parolni kiriting: ";
+                            cin>>yangi_parol;
+                            password = yangi_parol;
+                            cout<<"Success! ^_^";
+                        }
+                        else{
+                            cout<<"Parol xato :( ";
+                        }
+                    }
+                    
+                    else if(xizmatlar == 4){
+                        cout<<"Balans: "<<balance<<"so'm "<<endl;
+                    }
+                }
+            }
+        }
+        
+        else if (i == 0){
+            cout<<"GOOD bye ^_^ ";
+            return 0;
+        }  
+        
+        else{
+            cout<<"Error";
+            return 0;
+        }
+    }
+
+    return 0;
+}
+
